@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAMIGO — бриф на корпоративный сайт холдинга</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F5EE;
+  --card:#FFFFFF;
+  --ink:#1E2A21;
+  --muted:#6E7568;
+  --field:#2A5F3D;
+  --field-deep:#173927;
+  --wheat:#D9A441;
+  --wheat-soft:#F3E5C6;
+  --line:#E3E1D3;
+  --danger:#A4432C;
+  --r:14px;
+  --serif:'Prata',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.55;font-size:15.5px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+
+/* ---------- topbar ---------- */
+.topbar{position:sticky;top:0;z-index:60;background:rgba(246,245,238,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.tb-brand{font-family:var(--serif);font-size:16px;letter-spacing:.04em;color:var(--field-deep);white-space:nowrap}
+.tb-progress{display:flex;align-items:center;gap:10px;flex:1;min-width:180px}
+.tb-progress svg{display:block}
+.tb-pct{font-weight:700;font-size:13px;color:var(--field);min-width:38px;font-variant-numeric:tabular-nums}
+.tb-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ---------- buttons ---------- */
+.btn{font:inherit;font-weight:600;font-size:13.5px;border-radius:10px;padding:8px 14px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);transition:border-color .15s, background .15s, transform .05s}
+.btn:hover{border-color:var(--field)}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--field);border-color:var(--field);color:#fff}
+.btn-primary:hover{background:var(--field-deep);border-color:var(--field-deep)}
+.btn-ghost{background:transparent}
+.btn:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid rgba(42,95,61,.35);outline-offset:1px}
+
+/* ---------- hero ---------- */
+.hero{background:linear-gradient(155deg,var(--field-deep) 0%,#1E4A31 60%,#255539 100%);color:#F4F1E4;padding:52px 20px 46px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(217,164,65,.18),transparent 70%)}
+.hero-in{max-width:960px;margin:0 auto;position:relative}
+.hero-mark{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.hero-mark .name{font-family:var(--serif);font-size:20px;letter-spacing:.12em}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(26px,4.5vw,40px);line-height:1.2;max-width:640px;margin-bottom:14px}
+.hero p.lead{max-width:600px;color:#DCE4D6;font-size:15.5px}
+.steps{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.step{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 15px 7px 8px;font-size:13.5px;color:#EDEADC}
+.step b{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--wheat);color:#2C230D;font-size:12.5px}
+.hero-note{margin-top:18px;font-size:13px;color:#B9C7B4;max-width:640px}
+
+/* ---------- layout & cards ---------- */
+main{max-width:960px;margin:0 auto;padding:8px 20px 40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 26px 24px;margin:22px 0;box-shadow:0 1px 2px rgba(23,41,28,.04),0 10px 30px -22px rgba(23,41,28,.35)}
+.sec-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:6px}
+.sec-num{flex:none;width:34px;height:34px;border-radius:50%;background:var(--wheat-soft);border:1px solid #E4CE9C;color:#6B4F14;font-weight:800;font-size:14.5px;display:grid;place-items:center;margin-top:2px}
+.sec-head h2{font-family:var(--serif);font-weight:400;font-size:21px;color:var(--field-deep)}
+.sec-sub{color:var(--muted);font-size:13.5px;margin:2px 0 18px 48px}
+@media(max-width:560px){.sec-sub{margin-left:0}}
+
+/* ---------- fields ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px 16px}
+.f{display:flex;flex-direction:column;gap:5px}
+.f.wide{grid-column:1/-1}
+.f label{font-weight:600;font-size:13.5px}
+.hint{font-size:12.5px;color:var(--muted)}
+input[type=text],input[type=number],input[type=email],input[type=tel],input[type=url],textarea,select{
+  font:inherit;color:var(--ink);width:100%;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;transition:border-color .15s, box-shadow .15s}
+textarea{resize:vertical;min-height:74px}
+input:focus,textarea:focus,select:focus{border-color:var(--field);box-shadow:0 0 0 3px rgba(42,95,61,.12)}
+input::placeholder,textarea::placeholder{color:#A9AEA2}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236E7568' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+
+/* chips (checkboxes) */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:13.5px;cursor:pointer;user-select:none;transition:border-color .15s, background .15s}
+.chip input{accent-color:var(--field);width:15px;height:15px;cursor:pointer}
+.chip:has(input:checked){background:var(--field);border-color:var(--field);color:#fff}
+.chip:has(input:checked) input{accent-color:#fff}
+
+/* dynamic rows */
+.rows{display:flex;flex-direction:column;gap:10px}
+.row{display:grid;gap:10px;align-items:start}
+.row .del{flex:none;width:32px;height:38px;border:none;background:none;color:#B4B9AC;font-size:19px;cursor:pointer;border-radius:8px;line-height:1}
+.row .del:hover{color:var(--danger);background:#F7EDE9}
+.add{margin-top:12px;border-style:dashed;color:var(--field);font-weight:700}
+.row-mile{grid-template-columns:110px 1fr 32px}
+.row-cert{grid-template-columns:1.2fr 1fr auto 32px}
+.row-color{grid-template-columns:52px 110px 1fr 32px;align-items:center}
+.row-media{grid-template-columns:1fr 1.2fr 32px}
+@media(max-width:620px){.row-cert{grid-template-columns:1fr 1fr;grid-auto-rows:auto}.row-cert .del{position:absolute}.row-cert{position:relative;padding-right:34px}.row-cert .del{right:0;top:0}}
+input[type=color]{width:52px;height:38px;padding:3px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.hex{font-variant-numeric:tabular-nums}
+
+/* direction / contact blocks */
+.block{border:1px dashed #D6D3C2;border-radius:12px;padding:18px;background:#FDFDF9;position:relative;margin-bottom:14px}
+.block-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.block-head .tag{background:var(--field);color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:3px 12px;letter-spacing:.02em}
+.block-head .del-block{margin-left:auto;border:none;background:none;color:#B4B9AC;cursor:pointer;font-size:13px;font-weight:600;padding:4px 8px;border-radius:8px}
+.block-head .del-block:hover{color:var(--danger);background:#F7EDE9}
+
+/* photo checklist */
+.ph{display:grid;grid-template-columns:1.4fr 150px 1fr;gap:10px 14px;align-items:center;padding:11px 0;border-bottom:1px dashed var(--line)}
+.ph:last-of-type{border-bottom:none}
+.ph .t{font-weight:600;font-size:14px}
+.ph .t .hint{font-weight:400;display:block}
+@media(max-width:640px){.ph{grid-template-columns:1fr 1fr}.ph .t{grid-column:1/-1}}
+
+/* footer */
+footer{max-width:960px;margin:0 auto;padding:6px 20px 60px;color:var(--muted);font-size:13px}
+.footer-card{background:var(--field-deep);color:#EDEADC;border-radius:var(--r);padding:26px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.footer-card .btns{display:flex;gap:10px;flex-wrap:wrap}
+.footer-card .btn{border-color:rgba(255,255,255,.25);background:transparent;color:#fff}
+.footer-card .btn-primary{background:var(--wheat);border-color:var(--wheat);color:#2C230D}
+.footer-card .btn-primary:hover{background:#E5B252}
+.saved{font-size:12.5px;color:var(--muted);margin-top:10px;min-height:18px}
+
+@media print{.topbar,.tb-actions,.add,.del,.del-block,.footer-card .btns,.steps{display:none!important}.hero{padding:24px 20px}.card{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="tb-brand">FAMIGO · бриф</div>
+    <div class="tb-progress" title="Заполненность по разделам">
+      <svg id="ear" width="168" height="26" viewBox="0 0 168 26" aria-hidden="true">
+        <line x1="4" y1="13" x2="164" y2="13" stroke="#CDD3C4" stroke-width="2" stroke-linecap="round"/>
+        <g id="grains"></g>
+      </svg>
+      <span class="tb-pct" id="pct">0%</span>
+    </div>
+    <div class="tb-actions">
+      <button class="btn btn-ghost" id="btnLoad" type="button">Загрузить черновик</button>
+      <button class="btn" id="btnSave" type="button">Сохранить черновик</button>
+      <button class="btn btn-primary" id="btnMd" type="button">Скачать бриф (.md)</button>
+    </div>
+  </div>
+</div>
+<input type="file" id="fileIn" accept=".json,application/json" hidden>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-mark">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <line x1="17" y1="6" x2="17" y2="30" stroke="#D9A441" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="11.5" cy="12" rx="4.6" ry="2.6" fill="#D9A441" transform="rotate(-38 11.5 12)"/>
+        <ellipse cx="22.5" cy="12" rx="4.6" ry="2.6" fill="#D9A441" transform="rotate(38 22.5 12)"/>
+        <ellipse cx="11" cy="19" rx="4.6" ry="2.6" fill="#E5B252" transform="rotate(-38 11 19)"/>
+        <ellipse cx="23" cy="19" rx="4.6" ry="2.6" fill="#E5B252" transform="rotate(38 23 19)"/>
+        <ellipse cx="17" cy="5.5" rx="2.6" ry="4.4" fill="#D9A441"/>
+      </svg>
+      <span class="name">FAMIGO</span>
+    </div>
+    <h1>Материалы для корпоративного сайта холдинга</h1>
+    <p class="lead">Девять коротких разделов — примерно 20–30 минут. Файл работает без интернета: можно заполнить частично, сохранить черновик и вернуться позже.</p>
+    <div class="steps">
+      <div class="step"><b>1</b>Заполните разделы</div>
+      <div class="step"><b>2</b>Нажмите «Сохранить черновик»</div>
+      <div class="step"><b>3</b>Отправьте полученный файл нам</div>
+    </div>
+    <p class="hero-note">Сами файлы — логотипы, фото, сканы — загрузите в общую папку (Google Drive, Яндекс.Диск и т.п.) и вставьте ссылку в разделах 1, 4 и 7. Если каких-то данных пока нет — пропускайте, это нормально.</p>
+  </div>
+</header>
+
+<main>
+
+<!-- 1 ================================================== -->
+<section class="card" data-sec="1">
+  <div class="sec-head"><div class="sec-num">1</div><h2>Бренд</h2></div>
+  <p class="sec-sub">Логотипы и фирменные цвета — основа дизайна сайта.</p>
+  <div class="grid">
+    <div class="f">
+      <label for="logo_status">Логотип холдинга</label>
+      <select id="logo_status" data-f="logo_status">
+        <option value="" selected>— выберите —</option>
+        <option>Есть в SVG или PNG на прозрачном фоне</option>
+        <option>Есть, но только JPG / растровый</option>
+        <option>Логотипа нет — нужно отрисовать</option>
+      </select>
+    </div>
+    <div class="f">
+      <label for="logo_link">Ссылка на файл логотипа</label>
+      <input type="url" id="logo_link" data-f="logo_link" placeholder="https://…">
+      <span class="hint">Или положите в общую папку с материалами</span>
+    </div>
+    <div class="f wide">
+      <label for="subbrands">Логотипы / названия брендов направлений</label>
+      <textarea id="subbrands" data-f="subbrands" placeholder="Например: «Мельница Исфара» — логотип есть (в папке), «FAMIGO Agro» — только название…"></textarea>
+      <span class="hint">Если у направлений свои бренды — перечислите, что есть</span>
+    </div>
+  </div>
+  <div class="f wide" style="margin-top:16px">
+    <label>Фирменные цвета</label>
+    <span class="hint" style="margin-bottom:8px">Если уже утверждены — укажите. Клик по квадрату открывает палитру.</span>
+    <div class="rows" id="colors"></div>
+    <div>
+      <button class="btn add" type="button" data-add="colors">+ Добавить цвет</button>
+      <label class="chip" style="margin-left:10px"><input type="checkbox" id="colors_none" data-f="colors_none">Цвета ещё не утверждены</label>
+    </div>
+  </div>
+</section>
+
+<!-- 2 ================================================== -->
+<section class="card" data-sec="2">
+  <div class="sec-head"><div class="sec-num">2</div><h2>О холдинге</h2></div>
+  <p class="sec-sub">Ключевые цифры для главной страницы и блока «О нас».</p>
+  <div class="grid">
+    <div class="f">
+      <label for="holding_name">Название холдинга</label>
+      <input type="text" id="holding_name" data-f="holding_name" placeholder="FAMIGO">
+    </div>
+    <div class="f">
+      <label for="year">Год основания</label>
+      <input type="number" id="year" data-f="year" placeholder="2008" min="1950" max="2026">
+    </div>
+    <div class="f">
+      <label for="staff">Количество сотрудников</label>
+      <input type="text" id="staff" data-f="staff" placeholder="Например: 450 (всего) или по площадкам">
+    </div>
+    <div class="f">
+      <label for="volume">Объём производства</label>
+      <input type="text" id="volume" data-f="volume" placeholder="Тонн / упаковок в месяц или год">
+    </div>
+    <div class="f">
+      <label for="sku">Количество SKU / товарных позиций</label>
+      <input type="text" id="sku" data-f="sku" placeholder="Например: 120+">
+    </div>
+    <div class="f wide">
+      <label for="mission">Миссия и история создания</label>
+      <textarea id="mission" data-f="mission" rows="4" placeholder="2–3 предложения: с чего начинали, что для вас важно, к чему идёте"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- 3 ================================================== -->
+<section class="card" data-sec="3">
+  <div class="sec-head"><div class="sec-num">3</div><h2>Направления</h2></div>
+  <p class="sec-sub">По каждому из четырёх направлений. Лишние блоки удаляйте, недостающие добавляйте.</p>
+  <div id="dirs"></div>
+  <button class="btn add" type="button" data-add="dirs">+ Добавить направление</button>
+</section>
+
+<!-- 4 ================================================== -->
+<section class="card" data-sec="4">
+  <div class="sec-head"><div class="sec-num">4</div><h2>Фото и видео</h2></div>
+  <p class="sec-sub">Отметьте, что уже есть. Сами файлы — в общую папку, сюда только ссылку.</p>
+
+  <div class="ph">
+    <div class="t">Широкоформатное фото производства<span class="hint">Для главного экрана, минимум 1920 px по ширине</span></div>
+    <select data-f="ph_hero"><option value="" selected>—</option><option>Есть</option><option>Подготовим</option><option>Нет</option></select>
+    <input type="text" data-f="ph_hero_note" placeholder="Комментарий">
+  </div>
+  <div class="ph">
+    <div class="t">Фото продукции<span class="hint">По одному на каждое направление</span></div>
+    <select data-f="ph_products"><option value="" selected>—</option><option>Есть</option><option>Подготовим</option><option>Нет</option></select>
+    <input type="text" data-f="ph_products_note" placeholder="Комментарий">
+  </div>
+  <div class="ph">
+    <div class="t">Фото команды и цехов<span class="hint">4–6 снимков</span></div>
+    <select data-f="ph_team"><option value="" selected>—</option><option>Есть</option><option>Подготовим</option><option>Нет</option></select>
+    <input type="text" data-f="ph_team_note" placeholder="Комментарий">
+  </div>
+  <div class="ph">
+    <div class="t">Видео о холдинге<span class="hint">Или обложка для видеоблока</span></div>
+    <select data-f="ph_video"><option value="" selected>—</option><option>Есть</option><option>Подготовим</option><option>Нет</option></select>
+    <input type="text" data-f="ph_video_note" placeholder="Комментарий">
+  </div>
+
+  <div class="grid" style="margin-top:18px">
+    <div class="f wide">
+      <label for="photos_link">Ссылка на папку с материалами</label>
+      <input type="url" id="photos_link" data-f="photos_link" placeholder="https://drive.google.com/…">
+      <span class="hint">Google Drive, Яндекс.Диск, Dropbox — любой удобный сервис с открытым доступом по ссылке</span>
+    </div>
+  </div>
+</section>
+
+<!-- 5 ================================================== -->
+<section class="card" data-sec="5">
+  <div class="sec-head"><div class="sec-num">5</div><h2>История — ключевые вехи</h2></div>
+  <p class="sec-sub">4–6 дат: запуск площадок, выход на новые рынки, сертификации.</p>
+  <div class="rows" id="miles"></div>
+  <button class="btn add" type="button" data-add="miles">+ Добавить веху</button>
+</section>
+<style>.card{scroll-margin-top:70px}</style>
+
+<!-- 6 ================================================== -->
+<section class="card" data-sec="6">
+  <div class="sec-head"><div class="sec-num">6</div><h2>География</h2></div>
+  <p class="sec-sub">Текущие поставки и планы — для карты и блока «Экспорт».</p>
+  <div class="grid">
+    <div class="f">
+      <label for="geo_now">Куда уже поставляете</label>
+      <textarea id="geo_now" data-f="geo_now" placeholder="Страны и регионы: Таджикистан (все регионы), Узбекистан, Кыргызстан…"></textarea>
+    </div>
+    <div class="f">
+      <label for="geo_plan">Какие рынки рассматриваете</label>
+      <textarea id="geo_plan" data-f="geo_plan" placeholder="Например: Казахстан, Афганистан, Россия…"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ================================================== -->
+<section class="card" data-sec="7">
+  <div class="sec-head"><div class="sec-num">7</div><h2>Сертификаты</h2></div>
+  <p class="sec-sub">ХАССП, ISO, Халяль, декларации — названия и номера. Сканы — в общую папку.</p>
+  <div class="rows" id="certs"></div>
+  <button class="btn add" type="button" data-add="certs">+ Добавить сертификат</button>
+</section>
+
+<!-- 8 ================================================== -->
+<section class="card" data-sec="8">
+  <div class="sec-head"><div class="sec-num">8</div><h2>Контакты</h2></div>
+  <p class="sec-sub">По каждому направлению — адрес, телефон, e-mail.</p>
+  <div id="contacts"></div>
+  <button class="btn add" type="button" data-add="contacts" style="margin-bottom:20px">+ Добавить площадку</button>
+  <div class="grid">
+    <div class="f wide">
+      <label for="b2b_email">Общий e-mail для B2B-запросов и резюме</label>
+      <input type="email" id="b2b_email" data-f="b2b_email" placeholder="info@…">
+    </div>
+    <div class="f">
+      <label for="legal_name">Полное название юрлица</label>
+      <input type="text" id="legal_name" data-f="legal_name" placeholder="Для футера сайта, например: ООО «…»">
+    </div>
+    <div class="f">
+      <label for="legal_address">Юридический адрес</label>
+      <input type="text" id="legal_address" data-f="legal_address" placeholder="Город, улица, дом">
+    </div>
+    <div class="f">
+      <label for="inst">Instagram</label>
+      <input type="text" id="inst" data-f="inst" placeholder="@famigo или ссылка">
+    </div>
+    <div class="f">
+      <label for="tg">Telegram</label>
+      <input type="text" id="tg" data-f="tg" placeholder="@… или ссылка">
+    </div>
+    <div class="f">
+      <label for="soc_other">Другие соцсети</label>
+      <input type="text" id="soc_other" data-f="soc_other" placeholder="Facebook, LinkedIn, YouTube…">
+    </div>
+  </div>
+</section>
+
+<!-- 9 ================================================== -->
+<section class="card" data-sec="9">
+  <div class="sec-head"><div class="sec-num">9</div><h2>Медиа <span class="hint" style="font-family:var(--sans);font-size:13px">· необязательно</span></h2></div>
+  <p class="sec-sub">Публикации в СМИ, награды — название и ссылка.</p>
+  <div class="rows" id="media"></div>
+  <button class="btn add" type="button" data-add="media">+ Добавить ссылку</button>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-card">
+    <div style="max-width:520px">
+      <div style="font-family:var(--serif);font-size:18px;margin-bottom:6px">Готово?</div>
+      <div style="font-size:13.5px;color:#C9D4C2">Нажмите «Сохранить черновик» — скачается файл с ответами. Отправьте его нам вместе со ссылкой на папку с материалами. Заполнили не всё — не страшно, дополним по ходу.</div>
+      <div class="saved" id="savedMsg" style="color:#E9D9AC"></div>
+    </div>
+    <div class="btns">
+      <button class="btn" id="btnCopy" type="button">Скопировать текст</button>
+      <button class="btn" id="btnMd2" type="button">Скачать бриф (.md)</button>
+      <button class="btn btn-primary" id="btnSave2" type="button">Сохранить черновик</button>
+    </div>
+  </div>
+  <p style="margin-top:14px">Автономный файл: работает офлайн, данные никуда не отправляются и хранятся только в сохранённых вами файлах.</p>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=v=>String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const oneline=s=>String(s??'').replace(/\s*\n+\s*/g,' · ').trim();
+let dirty=false;
+
+/* ---------- шаблоны динамических блоков ---------- */
+const CH={ch_nets:'Торговые сети',ch_opt:'Опт и дистрибуция',ch_exp:'Экспорт',ch_horeca:'HoReCa',ch_retail:'Своя розница'};
+
+const TPL={
+colors:(d={})=>`<div class="row row-color" data-row>
+  <input type="color" data-k="hex" value="${esc(d.hex||'#2A5F3D')}" aria-label="Выбор цвета">
+  <input type="text" class="hex" data-k="hexText" value="${esc(d.hexText||'')}" placeholder="#2A5F3D" maxlength="7">
+  <input type="text" data-k="name" value="${esc(d.name||'')}" placeholder="Например: основной, акцент">
+  <button class="del" type="button" title="Удалить">&times;</button></div>`,
+
+miles:(d={})=>`<div class="row row-mile" data-row>
+  <input type="text" data-k="year" value="${esc(d.year||'')}" placeholder="2015">
+  <input type="text" data-k="event" value="${esc(d.event||'')}" placeholder="Что произошло: запуск площадки, выход на рынок, сертификация…">
+  <button class="del" type="button" title="Удалить">&times;</button></div>`,
+
+certs:(d={})=>`<div class="row row-cert" data-row>
+  <input type="text" data-k="name" value="${esc(d.name||'')}" placeholder="ХАССП / ISO 22000 / Халяль…">
+  <input type="text" data-k="num" value="${esc(d.num||'')}" placeholder="Номер">
+  <label class="chip"><input type="checkbox" data-k="scan" ${d.scan?'checked':''}>скан приложим</label>
+  <button class="del" type="button" title="Удалить">&times;</button></div>`,
+
+media:(d={})=>`<div class="row row-media" data-row>
+  <input type="text" data-k="title" value="${esc(d.title||'')}" placeholder="Публикация, награда">
+  <input type="text" data-k="link" value="${esc(d.link||'')}" placeholder="https://…">
+  <button class="del" type="button" title="Удалить">&times;</button></div>`,
+
+dirs:(d={})=>`<div class="block" data-row>
+  <div class="block-head"><span class="tag">Направление <span class="idx">1</span></span>
+    <button class="del-block" type="button">Удалить</button></div>
+  <div class="grid">
+    <div class="f"><label>Название бренда / юрлица</label>
+      <input type="text" data-k="brand" value="${esc(d.brand||'')}" placeholder="Точное название"></div>
+    <div class="f"><label>Город / регион площадки</label>
+      <input type="text" data-k="city" value="${esc(d.city||'')}" placeholder="Например: Исфара"></div>
+    <div class="f"><label>Мощность производства</label>
+      <input type="text" data-k="capacity" value="${esc(d.capacity||'')}" placeholder="Например: 300 т/мес"></div>
+    <div class="f wide"><label>Ассортимент — основные продукты</label>
+      <textarea data-k="products" placeholder="Перечислите ключевые продукты и форматы упаковки">${esc(d.products||'')}</textarea></div>
+    <div class="f wide"><label>Кому продаёте</label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" data-k="ch_nets" ${d.ch_nets?'checked':''}>Торговые сети</label>
+        <label class="chip"><input type="checkbox" data-k="ch_opt" ${d.ch_opt?'checked':''}>Опт и дистрибуция</label>
+        <label class="chip"><input type="checkbox" data-k="ch_exp" ${d.ch_exp?'checked':''}>Экспорт</label>
+        <label class="chip"><input type="checkbox" data-k="ch_horeca" ${d.ch_horeca?'checked':''}>HoReCa</label>
+        <label class="chip"><input type="checkbox" data-k="ch_retail" ${d.ch_retail?'checked':''}>Своя розница</label>
+      </div>
+      <input type="text" data-k="ch_other" value="${esc(d.ch_other||'')}" placeholder="Другое: маркетплейсы, тендеры…" style="margin-top:10px"></div>
+  </div></div>`,
+
+contacts:(d={})=>`<div class="block" data-row>
+  <div class="block-head"><span class="tag">Площадка <span class="idx">1</span></span>
+    <button class="del-block" type="button">Удалить</button></div>
+  <div class="grid">
+    <div class="f"><label>Направление / площадка</label>
+      <input type="text" data-k="cname" value="${esc(d.cname||'')}" placeholder="Например: мукомольное производство"></div>
+    <div class="f"><label>Адрес</label>
+      <input type="text" data-k="address" value="${esc(d.address||'')}" placeholder="Город, улица, дом"></div>
+    <div class="f"><label>Телефон</label>
+      <input type="tel" data-k="phone" value="${esc(d.phone||'')}" placeholder="+992 …"></div>
+    <div class="f"><label>E-mail</label>
+      <input type="email" data-k="email" value="${esc(d.email||'')}" placeholder="sales@…"></div>
+  </div></div>`
+};
+
+function addRow(kind,d){ $('#'+kind).insertAdjacentHTML('beforeend',TPL[kind](d||{})); renum(); }
+function renum(){ ['dirs','contacts'].forEach(id=>$$('#'+id+' [data-row]').forEach((r,i)=>{const t=r.querySelector('.idx'); if(t)t.textContent=i+1;})); }
+
+/* ---------- прогресс: колос из 9 зёрен ---------- */
+(function buildGrains(){
+  const g=$('#grains'); let h='';
+  for(let i=1;i<=9;i++){
+    const up=i%2===1, cx=16+(i-1)*17, cy=up?7.5:18.5, rot=up?-32:32;
+    h+=`<ellipse data-g="${i}" cx="${cx}" cy="${cy}" rx="6.2" ry="3.5" fill="#D9A441" fill-opacity="0.15" transform="rotate(${rot} ${cx} ${cy})" style="cursor:pointer"><title>Раздел ${i}</title></ellipse>`;
+  }
+  g.innerHTML=h;
+})();
+
+function update(){
+  let tot=0,fil=0;
+  $$('.card[data-sec]').forEach(sec=>{
+    const els=[...sec.querySelectorAll('input:not([type=checkbox]):not([type=color]),textarea,select')];
+    const t=els.length, f=els.filter(e=>e.value.trim()!=='').length;
+    tot+=t; fil+=f;
+    const gr=$(`[data-g="${sec.dataset.sec}"]`);
+    if(gr) gr.setAttribute('fill-opacity',(0.15+0.85*(t?f/t:0)).toFixed(2));
+  });
+  $('#pct').textContent=Math.round(tot?100*fil/tot:0)+'%';
+}
+
+/* ---------- сериализация ---------- */
+function serialize(){
+  const fields={};
+  $$('[data-f]').forEach(el=>fields[el.dataset.f]=el.type==='checkbox'?el.checked:el.value);
+  const arrays={};
+  ['colors','dirs','miles','certs','contacts','media'].forEach(kind=>{
+    arrays[kind]=$$('#'+kind+' [data-row]').map(r=>{
+      const o={}; r.querySelectorAll('[data-k]').forEach(el=>o[el.dataset.k]=el.type==='checkbox'?el.checked:el.value); return o;
+    });
+  });
+  return {v:1,app:'famigo-brief',saved:new Date().toISOString(),fields,arrays};
+}
+function applyData(d){
+  Object.entries(d.fields||{}).forEach(([k,v])=>{
+    const el=$(`[data-f="${k}"]`); if(!el)return;
+    if(el.type==='checkbox')el.checked=!!v; else el.value=v??'';
+  });
+  ['colors','dirs','miles','certs','contacts','media'].forEach(kind=>{
+    const c=$('#'+kind); c.innerHTML='';
+    const arr=(d.arrays&&d.arrays[kind])||[];
+    (arr.length?arr:DEFAULTS[kind]).forEach(item=>addRow(kind,item));
+  });
+  update(); dirty=false; msg('Черновик загружен — можно продолжать');
+}
+
+/* ---------- экспорт в Markdown ---------- */
+function buildMD(){
+  const d=serialize(); const F=k=>String(d.fields[k]??'').trim(); const A=d.arrays;
+  const filled=v=>String(v??'').trim()!=='';
+  const L=[]; const P=(...s)=>L.push(...s);
+  const sect=rows=>{P(...(rows.length?rows:['— пока не заполнено']),'');};
+
+  P(`# ${F('holding_name')||'FAMIGO'} — бриф на корпоративный сайт`,'',
+    `Дата: ${new Date().toISOString().slice(0,10)} · Заполнено: ${$('#pct').textContent}`,'');
+
+  P('## 1. Бренд');
+  { const r=[];
+    if(F('logo_status'))r.push(`- Логотип холдинга: ${F('logo_status')}`);
+    if(F('logo_link'))r.push(`- Файл логотипа: ${F('logo_link')}`);
+    if(F('subbrands'))r.push(`- Бренды направлений: ${oneline(F('subbrands'))}`);
+    if(d.fields.colors_none)r.push('- Фирменные цвета: ещё не утверждены');
+    else{
+      const cols=A.colors.filter(c=>filled(c.hexText)||filled(c.name));
+      if(cols.length)r.push('- Фирменные цвета: '+cols.map(c=>`${(c.hexText||c.hex||'').trim()}${filled(c.name)?` (${c.name.trim()})`:''}`).join(', '));
+    }
+    sect(r); }
+
+  P('## 2. О холдинге');
+  { const r=[]; const m=[['holding_name','Название'],['year','Год основания'],['staff','Сотрудники'],['volume','Объём производства'],['sku','SKU / товарных позиций']];
+    m.forEach(([k,t])=>{if(F(k))r.push(`- ${t}: ${F(k)}`);});
+    if(F('mission'))r.push(`- Миссия и история: ${oneline(F('mission'))}`);
+    sect(r); }
+
+  P('## 3. Направления');
+  { const ds=A.dirs.filter(x=>Object.values(x).some(v=>typeof v==='boolean'?v:filled(v)));
+    if(!ds.length)P('— пока не заполнено','');
+    ds.forEach((x,i)=>{
+      P(`### 3.${i+1} ${filled(x.brand)?x.brand.trim():'Направление '+(i+1)}${filled(x.city)?` — ${x.city.trim()}`:''}`);
+      if(filled(x.products))P(`- Продукты: ${oneline(x.products)}`);
+      if(filled(x.capacity))P(`- Мощность: ${x.capacity.trim()}`);
+      const ch=Object.keys(CH).filter(k=>x[k]).map(k=>CH[k]); if(filled(x.ch_other))ch.push(x.ch_other.trim());
+      if(ch.length)P(`- Каналы продаж: ${ch.join(', ')}`);
+      P('');
+    }); }
+
+  P('## 4. Фото и видео');
+  { const r=[]; const m=[['ph_hero','Главное фото производства'],['ph_products','Фото продукции'],['ph_team','Фото команды и цехов'],['ph_video','Видео / обложка']];
+    m.forEach(([k,t])=>{const st=F(k),nt=F(k+'_note'); if(st||nt)r.push(`- ${t}: ${st||'—'}${nt?` (${nt})`:''}`);});
+    if(F('photos_link'))r.push(`- Папка с материалами: ${F('photos_link')}`);
+    sect(r); }
+
+  P('## 5. История — ключевые вехи');
+  sect(A.miles.filter(x=>filled(x.year)||filled(x.event)).map(x=>`- ${x.year.trim()||'—'} — ${x.event.trim()}`));
+
+  P('## 6. География');
+  { const r=[];
+    if(F('geo_now'))r.push(`- Уже поставляем: ${oneline(F('geo_now'))}`);
+    if(F('geo_plan'))r.push(`- Рассматриваем: ${oneline(F('geo_plan'))}`);
+    sect(r); }
+
+  P('## 7. Сертификаты');
+  sect(A.certs.filter(x=>filled(x.name)||filled(x.num)).map(x=>`- ${x.name.trim()||'—'}${filled(x.num)?`, ${x.num.trim()}`:''}${x.scan?' — скан приложим':''}`));
+
+  P('## 8. Контакты');
+  { const cs=A.contacts.filter(x=>Object.values(x).some(filled));
+    cs.forEach((x,i)=>{
+      P(`### ${filled(x.cname)?x.cname.trim():'Площадка '+(i+1)}`);
+      if(filled(x.address))P(`- Адрес: ${x.address.trim()}`);
+      if(filled(x.phone))P(`- Телефон: ${x.phone.trim()}`);
+      if(filled(x.email))P(`- E-mail: ${x.email.trim()}`);
+      P('');
+    });
+    const r=[];
+    if(F('b2b_email'))r.push(`- Общий e-mail (B2B и резюме): ${F('b2b_email')}`);
+    if(F('legal_name'))r.push(`- Юрлицо: ${F('legal_name')}`);
+    if(F('legal_address'))r.push(`- Юридический адрес: ${F('legal_address')}`);
+    const soc=[]; if(F('inst'))soc.push(`Instagram ${F('inst')}`); if(F('tg'))soc.push(`Telegram ${F('tg')}`); if(F('soc_other'))soc.push(F('soc_other'));
+    if(soc.length)r.push(`- Соцсети: ${soc.join('; ')}`);
+    if(!cs.length&&!r.length)P('— пока не заполнено','');
+    else if(r.length)P(...r,''); }
+
+  P('## 9. Медиа');
+  sect(A.media.filter(x=>filled(x.title)||filled(x.link)).map(x=>`- ${x.title.trim()||x.link.trim()}${filled(x.title)&&filled(x.link)?` — ${x.link.trim()}`:''}`));
+
+  return L.join('\n');
+}
+
+/* ---------- скачивание / загрузка ---------- */
+function download(name,text,type){
+  const b=new Blob([text],{type:type+';charset=utf-8'});
+  const u=URL.createObjectURL(b), a=document.createElement('a');
+  a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(u),3000);
+}
+const stamp=()=>new Date().toISOString().slice(0,10);
+function msg(t){const e=$('#savedMsg'); if(e)e.textContent=t;}
+
+function saveDraft(){ download(`FAMIGO_brief_${stamp()}.json`,JSON.stringify(serialize(),null,2),'application/json'); dirty=false; msg('Черновик сохранён — этот файл и нужно отправить нам'); }
+function dlMD(){ download(`FAMIGO_brief_${stamp()}.md`,buildMD(),'text/markdown'); dirty=false; msg('Бриф скачан в формате .md'); }
+function copyMD(){
+  const t=buildMD();
+  const done=()=>msg('Текст брифа скопирован в буфер обмена');
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(()=>fallback()); } else fallback();
+  function fallback(){ const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');done();}catch(e){msg('Не получилось скопировать — скачайте .md');} ta.remove(); }
+}
+function loadDraft(){ $('#fileIn').click(); }
+$('#fileIn').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{ try{ applyData(JSON.parse(r.result)); }catch(err){ alert('Не удалось прочитать файл. Нужен черновик, сохранённый из этой формы (.json).'); } };
+  r.readAsText(f); e.target.value='';
+});
+
+/* ---------- события ---------- */
+document.addEventListener('click',e=>{
+  const add=e.target.closest('[data-add]');
+  if(add){ addRow(add.dataset.add); update(); dirty=true; return; }
+  if(e.target.closest('.del,.del-block')){ e.target.closest('[data-row]').remove(); renum(); update(); dirty=true; return; }
+  const gr=e.target.closest('[data-g]');
+  if(gr){ const s=$(`.card[data-sec="${gr.dataset.g}"]`); if(s)s.scrollIntoView({behavior:'smooth',block:'start'}); }
+});
+document.addEventListener('input',e=>{
+  dirty=true;
+  const row=e.target.closest('[data-row]');
+  if(row&&e.target.dataset.k==='hex'){ const t=row.querySelector('[data-k="hexText"]'); if(t)t.value=e.target.value.toUpperCase(); }
+  if(row&&e.target.dataset.k==='hexText'&&/^#[0-9a-fA-F]{6}$/.test(e.target.value)){ const c=row.querySelector('[data-k="hex"]'); if(c)c.value=e.target.value; }
+  update();
+});
+[['btnSave',saveDraft],['btnSave2',saveDraft],['btnMd',dlMD],['btnMd2',dlMD],['btnCopy',copyMD],['btnLoad',loadDraft]]
+  .forEach(([id,fn])=>{const el=document.getElementById(id); if(el)el.addEventListener('click',fn);});
+window.addEventListener('beforeunload',e=>{ if(dirty){ e.preventDefault(); e.returnValue=''; } });
+
+/* ---------- стартовые строки ---------- */
+const DEFAULTS={
+  colors:[{hex:'#2A5F3D'},{hex:'#D9A441'}],
+  dirs:[{},{},{},{}],
+  miles:[{},{},{},{}],
+  certs:[{},{}],
+  contacts:[{},{},{},{}],
+  media:[{}]
+};
+Object.entries(DEFAULTS).forEach(([k,arr])=>arr.forEach(item=>addRow(k,item)));
+update();
+</script>
+</body>
+</html>
